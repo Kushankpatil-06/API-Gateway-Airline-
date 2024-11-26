@@ -28,14 +28,17 @@ const response = await axios.get('http://localhost:3006/api/v1/isAuthenticated',
         }
     })
     console.log(response.data);
+    if(response.data.success){
+        next()
+    }
+    else{
+        res.status(401).send({message:'Unauthorized'})
+    }
     } catch (error) {
         return res.status(500).json({
             message: 'Error while checking authentication'
         })
     }
-    
-    console.log('hiii');
-    next()
 })
 
 
